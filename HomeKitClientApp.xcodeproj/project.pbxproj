@@ -12,6 +12,7 @@
 		E930D39D2A1FB0D2008FE7B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E930D39C2A1FB0D2008FE7B3 /* Assets.xcassets */; };
 		E930D3A12A1FB0D2008FE7B3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E930D3A02A1FB0D2008FE7B3 /* Preview Assets.xcassets */; };
 		E930D3A92A1FB7C3008FE7B3 /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E930D3A82A1FB7C3008FE7B3 /* HomeStore.swift */; };
+		E9F712DE2A2901B600E6E5C6 /* AccessoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F712DD2A2901B600E6E5C6 /* AccessoriesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		E930D3A02A1FB0D2008FE7B3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E930D3A72A1FB5D5008FE7B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E930D3A82A1FB7C3008FE7B3 /* HomeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStore.swift; sourceTree = "<group>"; };
+		E9F712DD2A2901B600E6E5C6 /* AccessoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoriesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				E930D39E2A1FB0D2008FE7B3 /* HomeKitClientApp.entitlements */,
 				E930D39F2A1FB0D2008FE7B3 /* Preview Content */,
 				E930D3A82A1FB7C3008FE7B3 /* HomeStore.swift */,
+				E9F712DD2A2901B600E6E5C6 /* AccessoriesView.swift */,
 			);
 			path = HomeKitClientApp;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 				E930D39B2A1FB0D0008FE7B3 /* HomeView.swift in Sources */,
 				E930D3A92A1FB7C3008FE7B3 /* HomeStore.swift in Sources */,
 				E930D3992A1FB0D0008FE7B3 /* HomeKitClientAppApp.swift in Sources */,
+				E9F712DE2A2901B600E6E5C6 /* AccessoriesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

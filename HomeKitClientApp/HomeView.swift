@@ -21,8 +21,8 @@ struct HomeView: View {
                 }) {
                     ForEach(model.homes, id: \.uniqueIdentifier) { home in
                         Text("\(home.name)")
-                    }.navigationDestination(for: HMHome.self) { _ in
-                        // TODO: Add AccessoriesView
+                    }.navigationDestination(for: HMHome.self) {
+                        AccessoriesView(homeId: $0.uniqueIdentifier, model: model)
                     }
                 }
             }

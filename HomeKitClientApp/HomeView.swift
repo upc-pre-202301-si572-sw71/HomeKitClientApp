@@ -20,9 +20,11 @@ struct HomeView: View {
                     Text("My Home")
                 }) {
                     ForEach(model.homes, id: \.uniqueIdentifier) { home in
-                        Text("\(home.name)")
-                    }.navigationDestination(for: HMHome.self) {
-                        AccessoriesView(homeId: $0.uniqueIdentifier, model: model)
+                        NavigationLink(value: home) {
+                            Text("\(home.name)")
+                        }.navigationDestination(for: HMHome.self) {
+                            AccessoriesView(homeId: $0.uniqueIdentifier, model: model)
+                        }
                     }
                 }
             }

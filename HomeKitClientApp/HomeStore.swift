@@ -11,6 +11,7 @@ import Combine
 
 class HomeStore: NSObject, ObservableObject, HMHomeManagerDelegate {
     @Published var homes: [HMHome] = []
+    @Published var accessories: [HMAccessory] = []
     private var manager: HMHomeManager!
     
     override init() {
@@ -30,4 +31,11 @@ class HomeStore: NSObject, ObservableObject, HMHomeManagerDelegate {
         self.homes = self.manager.homes
     }
     
+    func findAccessories(homeId: UUID) {
+        guard let devices = homes.first(where: {$0.uniqueIdentifier == homeId})?.accessories else {
+            print("Error: No Accessories found!")
+            return
+        }
+        accessories = devices
+    }
 }

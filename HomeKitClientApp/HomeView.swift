@@ -8,16 +8,22 @@
 import SwiftUI
 import HomeKit
 
+@available(iOS 16.0, *)
 struct HomeView: View {
+    @State private var path = NavigationPath()
     @ObservedObject var model: HomeStore
     
     var body: some View {
-        List {
-            Section(header: HStack {
-                Text("My Home")
-            }) {
-                ForEach(model.homes, id: \.uniqueIdentifier) { home in
-                    Text("\(home.name)")
+        NavigationStack(path: $path) {
+            List {
+                Section(header: HStack {
+                    Text("My Home")
+                }) {
+                    ForEach(model.homes, id: \.uniqueIdentifier) { home in
+                        Text("\(home.name)")
+                    }.navigationDestination(for: HMHome.self) { _ in
+                        // TODO: Add AccessoriesView
+                    }
                 }
             }
         }
@@ -26,7 +32,11 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(model: HomeStore())
+        if #available(iOS 16.0, *) {
+            HomeView(model: HomeStore())
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
 

@@ -18,7 +18,7 @@ struct ServicesView: View {
     var body: some View {
         List {
             Section(header: HStack {
-                Text("Services")
+                Text("\(model.accessories.first(where: {$0.uniqueIdentifier == accessoryId})?.name ?? "No Accessory Found") Services")
             }) {
                 ForEach(model.services, id: \.uniqueIdentifier) { service in
                     NavigationLink(value: service) {
@@ -29,6 +29,8 @@ struct ServicesView: View {
                     
                 }
             }
+        }.onAppear() {
+            model.findServices(accessoryId: accessoryId, homeId: homeId)
         }
     }
 }

@@ -23,8 +23,8 @@ struct AccessoriesView: View {
                 ForEach(model.accessories, id: \.uniqueIdentifier) { accessory in
                     NavigationLink(value: accessory) {
                         Text("\(accessory.name)")
-                    }.navigationDestination(for: HMAccessory.self) {_ in
-                        // TODO: Add ServicesView
+                    }.navigationDestination(for: HMAccessory.self) {
+                        ServicesView(accessoryId: $0.uniqueIdentifier, homeId: homeId, model: model)
                     }
                 }
             }

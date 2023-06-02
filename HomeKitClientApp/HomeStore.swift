@@ -13,6 +13,7 @@ class HomeStore: NSObject, ObservableObject, HMHomeManagerDelegate {
     @Published var homes: [HMHome] = []
     @Published var accessories: [HMAccessory] = []
     @Published var services: [HMService] = []
+    @Published var characteristics: [HMCharacteristic] = []
     private var manager: HMHomeManager!
     
     
@@ -52,5 +53,17 @@ class HomeStore: NSObject, ObservableObject, HMHomeManagerDelegate {
             return
         }
         services = accessoryServices
+    }
+    
+    func findCharacteristics(serviceId: UUID, accessoryId: UUID, homeId: UUID) {
+        guard let serviceCharacteristics = homes
+            .first(where: {$0.uniqueIdentifier == homeId})?
+            .accessories.first(where: {$0.uniqueIdentifier == accessoryId})?
+            .services.first(where: {$0.uniqueIdentifier == serviceId})?
+            .characteristics else {
+            print("Error: No characteristics found!")
+            return
+        }
+        characteristics = serviceCharacteristics
     }
 }

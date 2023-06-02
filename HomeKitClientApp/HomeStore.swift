@@ -16,6 +16,13 @@ class HomeStore: NSObject, ObservableObject, HMHomeManagerDelegate {
     @Published var characteristics: [HMCharacteristic] = []
     private var manager: HMHomeManager!
     
+    // Reading State
+    @Published var readingCharacteristics: Bool = false
+    
+    // Sample characteristics
+    @Published var powerState: Bool?
+    @Published var hueValue: Int?
+    @Published var brightnessValue: Int?
     
     override init() {
         super.init()
@@ -65,5 +72,27 @@ class HomeStore: NSObject, ObservableObject, HMHomeManagerDelegate {
             return
         }
         characteristics = serviceCharacteristics
+    }
+    
+    func readCharacteristicValues(serviceId: UUID) {
+        guard let characteristicsToRead = services.first(where: {$0.uniqueIdentifier == serviceId})?
+            .characteristics else {
+            print("Error: No characteristics found!")
+            return
+        }
+        
+        // Illustrating reading for the following characteristics: Power State, Hue Value, Bright Value
+        
+        readingCharacteristics = true
+        
+        for characteristic in characteristicsToRead {
+            characteristic.readValue(completionHandler: { _ in
+                print("Debug: Reading characteristic value: \(characteristic.localizedDescription)")
+                self.powerState = characteristic.localizedDescription == "Power State" ? characteristic.value as? Bool : false
+                self.hueValue = characteristic.localizedDescription == "Hue" ? characteristic.value as? Int : 0
+                self.brightnessValue = characteristic.localizedDescription == "Brightness" ? characteristic.value as? Int : 0
+            })
+        } 
+        readingCharacteristics = false
     }
 }

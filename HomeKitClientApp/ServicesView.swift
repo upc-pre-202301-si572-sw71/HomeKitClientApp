@@ -23,8 +23,8 @@ struct ServicesView: View {
                 ForEach(model.services, id: \.uniqueIdentifier) { service in
                     NavigationLink(value: service) {
                         Text("\(service.name)")
-                    }.navigationDestination(for: HMService.self) {_ in 
-                        // TODO: Add Characteristics View
+                    }.navigationDestination(for: HMService.self) { 
+                        CharacteristicsView(serviceId: $0.uniqueIdentifier, accessoryId: accessoryId, homeId: homeId, model: model)
                     }
                     
                 }

@@ -12,7 +12,9 @@ import Combine
 class HomeStore: NSObject, ObservableObject, HMHomeManagerDelegate {
     @Published var homes: [HMHome] = []
     @Published var accessories: [HMAccessory] = []
+    @Published var services: [HMService] = []
     private var manager: HMHomeManager!
+    
     
     override init() {
         super.init()
@@ -32,10 +34,23 @@ class HomeStore: NSObject, ObservableObject, HMHomeManagerDelegate {
     }
     
     func findAccessories(homeId: UUID) {
-        guard let devices = homes.first(where: {$0.uniqueIdentifier == homeId})?.accessories else {
+        guard let devices = homes
+            .first(where: {$0.uniqueIdentifier == homeId})?
+            .accessories else {
             print("Error: No Accessories found!")
             return
         }
         accessories = devices
+    }
+    
+    func findServices(accessoryId: UUID, homeId: UUID) {
+        guard let accessoryServices = homes
+            .first(where: {$0.uniqueIdentifier == homeId })?
+            .accessories.first(where: {$0.uniqueIdentifier == accessoryId})?
+            .services else {
+            print("Error: No services found!")
+            return
+        }
+        services = accessoryServices
     }
 }

@@ -11,6 +11,7 @@ import Combine
 
 class HomeStore: NSObject, ObservableObject, HMHomeManagerDelegate {
     @Published var homes: [HMHome] = []
+    @Published var rooms: [HMRoom] = []
     @Published var accessories: [HMAccessory] = []
     @Published var services: [HMService] = []
     @Published var characteristics: [HMCharacteristic] = []
@@ -112,5 +113,40 @@ class HomeStore: NSObject, ObservableObject, HMHomeManagerDelegate {
             guard let self = self else { return }
             self.homeManagerDidUpdateHomes(self.manager)
         }
+    }
+    
+    // Find Rooms
+    
+    func findRooms(homeId: UUID) {
+        guard let foundRooms = homes.first(where: {$0.uniqueIdentifier == homeId})?.rooms else {
+            print("Error: No Rooms found!")
+            return
+        }
+        rooms = foundRooms
+    }
+    
+    // Add Room
+    
+    func addRoom(homeId: UUID) {
+        guard let home = homes.first(where: {$0.uniqueIdentifier == homeId}) else {
+            print("Error: No home was found!")
+            return
+        }
+        home.addRoom(withName: "New Room \(UUID())") { [weak self] (room, error) in
+            guard let self = self else { return }
+            self.findRooms(homeId: homeId)
+            self.homeManagerDidUpdateHomes(self.manager)
+        }
+    }
+    
+    // Remove Room
+    
+    func removeRoom(homeId: UUID, room: HMRoom) {
+        manager.homes.first(where: {$0.uniqueIdentifier == homeId})?
+            .removeRoom(room) { [weak self] error in
+                guard let self = self else { return }
+                self.findRooms(homeId: homeId)
+                self.homeManagerDidUpdateHomes(self.manager)
+            }
     }
 }

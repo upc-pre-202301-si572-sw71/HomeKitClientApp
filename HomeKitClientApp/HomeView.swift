@@ -31,9 +31,16 @@ struct HomeView: View {
                             }
                         }
                     }
+                    Button("Add another Home") {
+                        addHome()
+                    }
                 }
             }
         
+    }
+    
+    func addHome() {
+        model.addHome()
     }
 }
 

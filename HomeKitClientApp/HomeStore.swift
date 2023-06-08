@@ -95,4 +95,22 @@ class HomeStore: NSObject, ObservableObject, HMHomeManagerDelegate {
         } 
         readingCharacteristics = false
     }
+    
+    // Adding a Home
+    
+    func addHome() {
+        manager.addHome(withName: "New Home \(UUID())") { [weak self] (home, error) in
+            guard let self = self else { return }
+            self.homeManagerDidUpdateHomes(self.manager)
+        }
+    }
+    
+    // Removing Home
+    
+    func removeHome(home: HMHome) {
+        manager.removeHome(home) { [weak self] error in
+            guard let self = self else { return }
+            self.homeManagerDidUpdateHomes(self.manager)
+        }
+    }
 }
